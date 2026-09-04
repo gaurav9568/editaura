@@ -1,0 +1,316 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════
+   EDITAURA DESIGN SYSTEM — Cinematic Gold/Black
+   ═══════════════════════════════════════════════ */
+
+:root {
+  --black: #060608;
+  --black2: #0c0c10;
+  --black3: #13131a;
+  --black4: #1a1a24;
+  --gold: #c8a45a;
+  --gold2: #e2c07a;
+  --gold3: #7a6030;
+  --goldglow: rgba(200, 164, 90, 0.18);
+  --cream: #f0e8d8;
+  --cream2: rgba(240, 232, 216, 0.5);
+  --cream3: rgba(240, 232, 216, 0.12);
+  --font-d: 'Cormorant Garamond', serif;
+  --font-b: 'Jost', sans-serif;
+  --background: #060608;
+  --foreground: #f0e8d8;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-gold: #c8a45a;
+  --color-gold2: #e2c07a;
+  --color-gold3: #7a6030;
+  --color-black2: #0c0c10;
+  --color-black3: #13131a;
+  --color-black4: #1a1a24;
+  --color-cream: #f0e8d8;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: var(--font-b);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ─────────────────────────────── */
+#cdot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+}
+
+#cring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9998;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(200, 164, 90, 0.55);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, border-color 0.3s;
+}
+
+body.ch #cdot {
+  width: 13px;
+  height: 13px;
+  background: var(--gold2);
+}
+
+body.ch #cring {
+  width: 54px;
+  height: 54px;
+  border-color: var(--gold);
+}
+
+body.cc #cdot {
+  width: 5px;
+  height: 5px;
+}
+
+body.cc #cring {
+  width: 24px;
+  height: 24px;
+}
+
+/* ── SCROLL REVEAL ─────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.reveal.vis {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── KEYFRAMES ─────────────────────────────────── */
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── GRAIN OVERLAY ─────────────────────────────── */
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.45;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='0.07'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+
+.scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.06) 0px,
+    rgba(0, 0, 0, 0.06) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 100% 100% at 50% 50%,
+    transparent 38%,
+    rgba(6, 6, 8, 0.92) 100%
+  );
+}
+
+/* ── SECTION COMMON ────────────────────────────── */
+.sec-head {
+  text-align: center;
+  margin-bottom: 4.5rem;
+}
+
+.sec-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.9rem;
+}
+
+.sec-title {
+  font-family: var(--font-d);
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.05;
+}
+
+.sec-title em {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.gline {
+  width: 50px;
+  height: 1px;
+  background: var(--gold);
+  margin: 1.2rem auto 0;
+  opacity: 0.5;
+}
+
+/* ── BUTTONS ───────────────────────────────────── */
+.btn-gold {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: var(--gold);
+  color: var(--black);
+  padding: 0.9rem 2.4rem;
+  font-weight: 500;
+  transition: background 0.3s, transform 0.2s;
+  display: inline-block;
+}
+
+.btn-gold:hover {
+  background: var(--gold2);
+  transform: translateY(-3px);
+}
+
+.btn-ghost {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(200, 164, 90, 0.4);
+  color: var(--gold);
+  padding: 0.9rem 2.4rem;
+  font-weight: 300;
+  transition: border-color 0.3s, background 0.3s, transform 0.2s;
+  display: inline-block;
+}
+
+.btn-ghost:hover {
+  border-color: var(--gold);
+  background: var(--goldglow);
+  transform: translateY(-3px);
+}
+
+/* ── FORM GLOBALS ──────────────────────────────── */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--cream);
+  -webkit-box-shadow: 0 0 0px 1000px var(--black3) inset;
+}
+
+/* ── RESPONSIVE ────────────────────────────────── */
+@media (max-width: 768px) {
+  .lbox-t, .lbox-b {
+    height: 35px !important;
+  }
+
+  #portfolio,
+  #services,
+  #testimonials,
+  #inquiry {
+    padding: 5rem 1.6rem !important;
+  }
+
+  .folder-panel-responsive {
+    padding: 3rem 1.6rem !important;
+  }
+
+  footer {
+    padding: 3rem 1.6rem !important;
+  }
+
+  .inq-wrap-responsive {
+    padding: 2rem 1.4rem !important;
+  }
+
+  .frow-responsive {
+    grid-template-columns: 1fr !important;
+  }
+
+  nav {
+    padding: 1.2rem 1.6rem !important;
+  }
+
+  .nav-links-desktop {
+    display: none !important;
+  }
+
+  .mobile-menu-btn {
+    display: block !important;
+  }
+}

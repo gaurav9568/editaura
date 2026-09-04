@@ -1,0 +1,22 @@
+
+> video-portfolio@0.1.0 dev
+> next dev --turbopack
+
+   ▲ Next.js 15.5.12 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://10.49.172.42:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 16.6s
+ ○ Compiling / ...
+ ✓ Compiled / in 40.6s
+ GET / 200 in 44202ms
+ GET / 200 in 3746ms
+ ○ Compiling /icon.png ...
+ ✓ Compiled /icon.png in 9.2s
+ GET /icon.png?icon.62d1aee9.png 200 in 11370ms
+ GET /icon.png?icon.62d1aee9.png 200 in 3535ms
+ GET / 200 in 2422ms
+ GET /icon.png?icon.62d1aee9.png 200 in 992ms
+Terminate batch job (Y/N)? [?25h
