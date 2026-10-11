@@ -15,12 +15,27 @@ export default function Inquiry() {
     setFormData((prev) => ({ ...prev, [field]: e.target.value }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!formData.name || !formData.email || !formData.phone) {
       alert("Please fill in name, email and phone.");
       return;
     }
-    // EmailJS integration placeholder
+    try {
+      const [firstname, ...rest] = formData.name.trim().split(" ");
+      const lastname = rest.join(" ");
+      await fetch("/api/email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstname: firstname || "Client",
+          lastname: lastname || "",
+          email: formData.email,
+          message: `Phone / WhatsApp: ${formData.phone}\nService Needed: ${formData.service || "Not specified"}\n\nProject Details:\n${formData.details || "None provided"}`,
+        }),
+      });
+    } catch (e) {
+      console.error("Email send failed:", e);
+    }
     setSubmitted(true);
   };
 
@@ -80,57 +95,7 @@ export default function Inquiry() {
           }}
         />
 
-        {/* Setup note */}
-        <div
-          style={{
-            background: "rgba(200,164,90,0.06)",
-            border: "1px solid rgba(200,164,90,0.18)",
-            borderLeft: "3px solid var(--gold)",
-            padding: "1.1rem 1.4rem",
-            marginBottom: "2rem",
-            fontSize: "0.74rem",
-            fontWeight: 300,
-            color: "rgba(240,232,216,0.5)",
-            lineHeight: 1.9,
-            borderRadius: "1px",
-          }}
-        >
-          <strong style={{ color: "var(--gold)" }}>
-            ⚙️ EmailJS Setup (5 min, free):
-          </strong>
-          <br />
-          1. Sign up at <strong style={{ color: "var(--gold)" }}>
-            emailjs.com
-          </strong>{" "}
-          → connect Gmail &nbsp; 2. Create template with:{" "}
-          <code
-            style={{
-              background: "rgba(0,0,0,0.4)",
-              padding: "0.1em 0.4em",
-              borderRadius: "2px",
-              color: "var(--gold2)",
-              fontSize: "0.85em",
-            }}
-          >
-            {"{{client_name}}"}
-          </code>{" "}
-          <code
-            style={{
-              background: "rgba(0,0,0,0.4)",
-              padding: "0.1em 0.4em",
-              borderRadius: "2px",
-              color: "var(--gold2)",
-              fontSize: "0.85em",
-            }}
-          >
-            {"{{client_email}}"}
-          </code>
-          <br />
-          3. Replace the 3 keys in the script &nbsp;{" "}
-          <strong style={{ color: "var(--gold)" }}>
-            Delete this once done.
-          </strong>
-        </div>
+        {/* Form container */}
 
         {!submitted ? (
           <div>
