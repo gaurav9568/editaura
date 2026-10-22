@@ -2,7 +2,7 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { useAdmin } from "../components/AdminProvider";
 
-const folderLabels = {
+const defaultFolderLabels = {
   premium: "Best Premium Edits",
   brand: "Brand Motion Graphics",
   podcast: "Podcast Edits",
@@ -79,6 +79,7 @@ export default function Portfolio() {
     recent: [],
     other: [],
   });
+  const [folderLabels, setFolderLabels] = useState(defaultFolderLabels);
   const [loadingVideos, setLoadingVideos] = useState(true);
   const [openPanel, setOpenPanel] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -105,6 +106,7 @@ export default function Portfolio() {
         recent: [],
         other: [],
       };
+      const newFolderLabels = { ...defaultFolderLabels };
 
       data.videos.forEach((doc) => {
         const rawKey = (doc.id || doc.type || "").toLowerCase().trim();
@@ -115,17 +117,18 @@ export default function Portfolio() {
           .map((v) => parseVideoItem(v, rawKey))
           .filter(Boolean);
 
-        if (newFolderData.hasOwnProperty(rawKey)) {
-          newFolderData[rawKey] = parsed;
-        } else {
-          newFolderData[rawKey] = parsed;
+        newFolderData[rawKey] = parsed;
+
+        if (doc.title || doc.label) {
+          newFolderLabels[rawKey] = (doc.title || doc.label).trim();
+        } else if (!newFolderLabels[rawKey]) {
+          newFolderLabels[rawKey] =
+            rawKey.charAt(0).toUpperCase() + rawKey.slice(1).replace(/[-_]/g, " ");
         }
       });
 
-      setFolderData((prev) => ({
-        ...prev,
-        ...newFolderData,
-      }));
+      setFolderData(newFolderData);
+      setFolderLabels(newFolderLabels);
     } catch (err) {
       console.error("Error fetching videos from Firestore:", err);
     } finally {
@@ -352,9 +355,9 @@ export default function Portfolio() {
               key={key}
               folderKey={key}
               label={label}
-              count={folderData[key].length}
+              count={(folderData[key] || []).length}
               thumbs={
-                folderData[key].length > 0
+                (folderData[key] || []).length > 0
                   ? folderData[key].slice(0, 3).map((v) => v.thumb)
                   : defaultThumbs
               }
@@ -372,7 +375,7 @@ export default function Portfolio() {
           label={label}
           isOpen={openPanel === key}
           onClose={() => setOpenPanel(null)}
-          videos={folderData[key]}
+          videos={folderData[key] || []}
           isAdmin={isAdmin}
           onAdd={() => openAdd(key)}
           onDelete={(idx) => deleteVideo(key, idx)}
@@ -394,6 +397,7 @@ export default function Portfolio() {
           onAdd={addVideo}
           addForFolder={addForFolder}
           setAddForFolder={setAddForFolder}
+          folderLabels={folderLabels}
         />
       )}
 
@@ -902,6 +906,7 @@ function AddVideoModal({
   onAdd,
   addForFolder,
   setAddForFolder,
+  folderLabels = defaultFolderLabels,
 }) {
   return (
     <div
