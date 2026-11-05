@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { verifyAuth } from "@/lib/auth";
 import cloudinary from "@/lib/cloudinary";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req) {
   try {
     await verifyAuth();

@@ -1,6 +1,8 @@
 import { adminAuth } from "@/lib/firebase-admin";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 // POST — Client sends Firebase ID token, we verify it and set a cookie
 export async function POST(req) {
   try {

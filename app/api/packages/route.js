@@ -2,6 +2,8 @@ import { db } from "@/lib/firebase-admin";
 import { NextResponse } from "next/server";
 import { verifyAuth } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
+
 const collection = "packages";
 
 export async function GET() {

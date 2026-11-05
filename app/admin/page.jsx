@@ -3,6 +3,8 @@ import { adminAuth } from "@/lib/firebase-admin";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminPage() {
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
