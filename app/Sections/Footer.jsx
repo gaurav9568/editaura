@@ -66,11 +66,7 @@ export default function Footer() {
         }}
       >
         Founded by{" "}
-        <b style={{ color: "var(--gold)", fontWeight: 400 }}>Sunil</b>{" "}
-        &nbsp;·&nbsp;{" "}
-        <b style={{ color: "var(--gold)", fontWeight: 400 }}>Sudarshan</b>{" "}
-        &nbsp;·&nbsp;{" "}
-        <b style={{ color: "var(--gold)", fontWeight: 400 }}>Gaurav</b>
+        <b style={{ color: "var(--gold)", fontWeight: 400 }}>Sunil</b>
       </div>
       <div
         style={{

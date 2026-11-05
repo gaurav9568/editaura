@@ -242,7 +242,7 @@ export default function Inquiry() {
             >
               Thank you for reaching out.
               <br />
-              Sunil, Sudarshan or Gaurav will contact you within 24 hours.
+              Sunil will contact you within 24 hours.
             </p>
           </div>
         )}

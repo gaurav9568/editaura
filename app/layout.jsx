@@ -17,7 +17,7 @@ const jost = Jost({
 export const metadata = {
   title: "EDITAURA — Video Editing Studio",
   description:
-    "Cinematic video editing studio by Sunil, Sudarshan & Gaurav. YouTube editing, Reels, Podcast production — crafted to captivate.",
+    "Cinematic video editing studio by Sunil. YouTube editing, Reels, Podcast production — crafted to captivate.",
   keywords: [
     "video editing",
     "YouTube editing",

@@ -18,7 +18,7 @@ export default function Testimonials() {
       initials: "RV",
       name: "Rahul Verma",
       role: "Brand Founder · Lumina Co.",
-      text: "Best investment for my brand. The Reels they produced got 3× more reach than anything I'd posted before. Sunil, Sudarshan and Gaurav are true artists.",
+      text: "Best investment for my brand. The Reels they produced got 3× more reach than anything I'd posted before. Sunil is a true artist.",
     },
   ];
 

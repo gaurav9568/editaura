@@ -247,7 +247,7 @@ export default function Hero() {
           <b style={{ color: "var(--gold)", fontWeight: 400 }}>
             Video Editing Studio
           </b>{" "}
-          · Sunil &nbsp;·&nbsp; Sudarshan &nbsp;·&nbsp; Gaurav
+          · Sunil
           <br />
           YouTube &nbsp;·&nbsp; Reels &nbsp;·&nbsp; Podcast — crafted to
           captivate
